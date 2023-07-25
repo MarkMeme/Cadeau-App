@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -50,31 +51,34 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IntlPhoneField(
-                  onSaved: (newValue) {
-                    _entedPhoneNumber = newValue!.completeNumber;
-                  },
-                  validator: (value) {
-                    final RegExp phoneRegex = RegExp(r'^[0-9 ()-]+$');
-                    if (value!.number.isEmpty) {
-                      return 'Please enter a phone number.';
-                    } else if (!phoneRegex.hasMatch(value.completeNumber)) {
-                      return 'Invalid phone number.';
-                    }
-                    return null;
-                  },
-                  focusNode: focusNode,
-                  decoration: const InputDecoration(
-                    labelText: 'Phone Number',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(),
+                Text('Phone number',style: TextStyle(color: ),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                      alignment: Alignment.bottomLeft,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(0),
+                          margin: EdgeInsets.only(left: 9),
+                          alignment: AlignmentDirectional.bottomStart,
+                          color: Color.fromARGB(221, 99, 99, 99),
+                          width: 45,
+                          height: 1,
+                        ),
+                        const CountryCodePicker(
+                          boxDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(12))),
+                          showDropDownButton: true,
+                          textStyle: TextStyle(fontSize: 15),
+                          padding: EdgeInsets.all(0),
+                          showFlag: false,
+                        ),
+                      ],
                     ),
-                  ),
-                  languageCode: "en",
-                  onChanged: (phone) {
-                    _entedPhoneNumber = phone.completeNumber;
-                    _updateButtonColor();
-                  },
+                    Expanded(child: TextFormField())
+                  ],
                 ),
                 const SizedBox(
                   height: 9,
@@ -85,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     _updateButtonColor();
                   },
                   obscureText: isObscure,
+
                   //focusNode: focusNode,
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
@@ -99,9 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         }),
                     labelText: 'Password',
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide(),
-                    ),
+                    // border: const OutlineInputBorder(
+                    //   borderSide: BorderSide(),
+                    // ),
                   ),
                   validator: (value) {
                     if (value == null ||
@@ -146,3 +151,32 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+
+
+ // IntlPhoneField(
+                //   onSaved: (newValue) {
+                //     _entedPhoneNumber = newValue!.completeNumber;
+                //   },
+                //   validator: (value) {
+                //     final RegExp phoneRegex = RegExp(r'^[0-9 ()-]+$');
+                //     if (value!.number.isEmpty) {
+                //       return 'Please enter a phone number.';
+                //     } else if (!phoneRegex.hasMatch(value.completeNumber)) {
+                //       return 'Invalid phone number.';
+                //     }
+                //     return null;
+                //   },
+                //   focusNode: focusNode,
+                //   decoration: const InputDecoration(
+                //     labelText: 'Phone Number',
+                //     border: OutlineInputBorder(
+                //       borderSide: BorderSide(),
+                //     ),
+                //   ),
+                //   languageCode: "en",
+                //   onChanged: (phone) {
+                //     _entedPhoneNumber = phone.completeNumber;
+                //     _updateButtonColor();
+                //   },
+                // ),
